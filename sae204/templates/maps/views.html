@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Information complémentaire {{stationcode}}</title>
+	<meta charset="UTF-8">
+</head>
+<body>
+	<a href="/maps"><-</a>
+	<h1> Station({{stationcode}}) : {{nomstation}}</h2>
+	<p>Capacité maximal: {{capa_max}}</p>
+	<p> Moyenne du nombre de bornes disponibles: {{moy_borne}}</p>
+	<p> Moyenne du nombre de vélos disponibles: {{moy_velo}}</p>
+	<p> Moyenne du nombre de vélos électriques disponibles: {{moy_ebike}}</p>
+	<p> Moyenne du nombre de méchaniques disponibles: {{moy_mbike}}</p>
+	{% load static %}
+	<form action="./" method="get">
+		<input type="hidden" name="station_id" value="{{stationcode}}"/>
+		<label>Start date and time: </label>
+		<input type="date" name="start_date" value="Start Date"/>
+		<input type="time" name="start_time" value="Start Time"/>
+		<label>End date and time: </label>
+		<input type="date" name="end_date" value="End Date"/>
+		<input type="time" name="end_time" value="End Time"/>
+		<input type="submit" value="Submit" />
+	</form>
+	<p>DATA : Depuis {{start_date}} à {{end_date}}</p>
+	<img src="{% static 'maps/img/Pourcentage_bikes_station.png' %}" alt="Pourcentages des types de vélos">
+	<img src="{% static 'maps/img/Pourcentage_borne_station.png' %}" alt="Pourcentages des bornes disponibles et des vélos disponibles">
+	<img src="{% static 'maps/img/Evol_graph_station.png' %}" alt="Evolution des informations de la station">
+</body>

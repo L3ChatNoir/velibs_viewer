@@ -1,0 +1,32 @@
+DROP TRIGGER IF EXISTS logs_insert_status;
+	
+
+DROP TRIGGER IF EXISTS logs_update_status;
+CREATE TRIGGER logs_update_status AFTER UPDATE ON station_status 
+FOR EACH ROW
+INSERT INTO history_change (date_time, table_use, action, stationcode, user)
+VALUES (date_time, 'station_status', UPDATE, stationcode, CURRENT_USER);
+
+DROP TRIGGER IF EXISTS logs_delete_status;
+CREATE TRIGGER logs_delete_status AFTER DELETE ON station_status 
+FOR EACH ROW
+INSERT INTO history_change (date_time, table_use, action, stationcode, user)
+VALUES (date_time, 'station_status', 'DELETE', stationcode, CURRENT_USER);
+
+DROP TRIGGER IF EXISTS logs_insert_information ;
+CREATE TRIGGER logs_insert_information  AFTER INSERT ON station_information 
+FOR EACH ROW
+INSERT INTO history_change (date_time, table_use, action, stationcode, user)
+VALUES (date_time, 'station_information', 'INSERT', stationcode, CURRENT_USER);
+
+DROP TRIGGER IF EXISTS logs_update_status;
+CREATE TRIGGER logs_update_information  AFTER UPDATE ON station_information 
+FOR EACH ROW
+INSERT INTO history_change (date_time, table_use, action, stationcode, user)
+VALUES (date_time, 'station_information', UPDATE, stationcode, CURRENT_USER);
+
+DROP TRIGGER IF EXISTS logs_delete_status;
+CREATE TRIGGER logs_delete_information AFTER DELETE ON station_information 
+FOR EACH ROW
+INSERT INTO history_change (date_time, table_use, action, stationcode, user)
+VALUES (date_time, 'station_information', 'DELETE', stationcode, CURRENT_USER);
